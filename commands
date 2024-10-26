@@ -1,0 +1,14 @@
+db.employees.insert({name: "aman" , age: 24})
+db.employees.insertMany([{name:"pqr", price: 1234, age:123},{name:"xyz", price: 434, age:23}])
+db.employees.find().sort({age:-1}).limit(2)
+db.employees.find({age:23})
+
+db.employees.updateOne({age:23},{$set: {
+  age:32
+}})
+
+db.employees.find({},{
+  age:1,
+  name:1,
+  _id: 0
+})
