@@ -12,3 +12,47 @@ db.employees.find({},{
   name:1,
   _id: 0
 })
+
+Day 2
+=========
+
+db.employees.find({
+  age: {
+    $eq: 24
+  }
+})
+
+db.employees.find({
+  age:{
+    $in:[24,32]
+  }
+})
+
+db.employees.find({
+  age: {
+    $gte: 32
+  }
+})
+
+
+
+db.employees.find({
+  $and: [{
+    age: {
+      $eq:24
+    }
+  },{
+    name: {
+      $eq : "aman"
+    }
+  }]
+},{
+  _id:0,
+  name:1,
+  age:1
+})
+
+
+db.employees.find({
+  $nor :[{name:"aman"}, {age:32}]
+})
