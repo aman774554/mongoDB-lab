@@ -56,3 +56,33 @@ db.employees.find({
 db.employees.find({
   $nor :[{name:"aman"}, {age:32}]
 })
+
+Day3
+=====
+
+db.employees.find({
+  age:{
+    $exists:true
+  }
+},{
+  _id:0,
+  age:1
+}).sort({
+  age: -1
+}).limit(2)
+
+db.employees.updateOne({name:"xyz"},{
+  $inc:{
+    age:50
+  }
+})
+
+db.employees.find()
+
+//min will decrease upper values and increase in case of max for lower values
+db.employees.updateMany({},{$max:{
+  age:50
+}})
+
+db.employees.find()
+
