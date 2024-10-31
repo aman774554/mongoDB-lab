@@ -86,3 +86,29 @@ db.employees.updateMany({},{$max:{
 
 db.employees.find()
 
+Day4
+=======
+db.employees.updateMany({},{$mul:{
+  age:2
+}})
+
+db.products.updateOne({
+    _id: 1
+}, {
+    $unset: {
+        price: ""
+    }
+})
+
+db.products.updateMany({}, {
+    $rename: {
+        nmea: "name"
+    }
+})
+
+db.employees.updateMany(
+    {},
+    { $set: {price: 999} },
+    { upsert: true}
+)
+db.products.deleteOne({ _id: 1 })
