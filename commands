@@ -112,3 +112,66 @@ db.employees.updateMany(
     { upsert: true}
 )
 db.products.deleteOne({ _id: 1 })
+
+Day5
+======
+db.employees.aggregate([{
+  $match:{
+    name:"aman"
+  }
+},{
+  $group:{
+    _id:"$name",
+    total_price: {$sum:"$price"}
+  }
+}])
+---
+db.sales.aggregate([
+  {
+    $group: {
+      _id: '$item',
+      averageAmount: { $avg: { $multiply: ['$quantity', '$price'] } },
+    },
+  },
+  { $sort: { averageAmount: 1 } },
+])
+---
+db.sales.aggregate([
+  {
+    $group: {
+      _id: '$item',
+      itemCount: { $count: {} },
+    },
+  },
+])
+
+----
+db.sales.aggregate([
+  {
+    $group: {
+      _id: null,
+      maxQty: { $max: '$quantity' },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+    },
+  },
+]);
+
+//[ { maxQty: 30 } ]
+
+---
+db.employees.createIndex({name:1},{unique:true})
+
+db.locations.createIndex({
+	lat: 1,
+	long: 1
+},{ unique: true });
+
+db.movies.dropIndex('year_1')
+
+db.movies.find({
+   title: 'Pirates of Silicon Valley'
+}).explain('executionStats')
